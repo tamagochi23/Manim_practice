@@ -15,8 +15,11 @@ class SquareToCircle(Scene):
         square.rotate(PI / 4)  # rotate a certain amount
 
         self.play(Create(square))  # animate the creation of the square
+        self.wait(2)  # wait for 2 seconds
         self.play(Transform(square, circle))  # interpolate the square into the circle
+        self.wait(2)  # wait for 2 seconds
         self.play(FadeOut(square))  # fade out animation
+        self.wait(2)  # wait for 2 seconds
 
 class SquareAndCircle(Scene):
     def construct(self):
@@ -48,7 +51,7 @@ class DifferentRotations(Scene):
         left_square = Square(color=BLUE, fill_opacity=0.7).shift(2 * LEFT)
         right_square = Square(color=GREEN, fill_opacity=0.7).shift(2 * RIGHT)
         self.play(
-            left_square.animate.rotate(PI), Rotate(right_square, angle=PI), run_time=2
+            left_square.animate.rotate(PI/2), Rotate(right_square, angle=PI), run_time=2
         )
         self.wait()
 
@@ -56,16 +59,16 @@ class Ecuations(Scene):
     def construct(self):
         eqn0 = MathTex("2x^2+6x+7=0").move_to(UP * 3)
         eqn1 = MathTex("x = \\frac{-b\\pm \\sqrt{b^2-4ac}} {2a}").move_to(UP*1.5)
-        eqn2 = MathTex(r"x = \frac{-b\pm \sqrt{b^2-4ac}} {2a}").move_to(UP*1.5)
+        eqn2 = MathTex(r"x = \frac{-b\pm \sqrt{b^2-4ac}} {2a}")
         eqn3 = MathTex(r"\left(\begin{array}{cc} 1 & 2 \\ 3 & 4 \end{array}\right)").move_to(DOWN*2)
         self.play(Write(eqn0))
-        self.wait(3)
+        self.wait(1)
         self.play(Write(eqn1))
-        self.wait(3)
+        self.wait(1)
         self.play(Write(eqn2))
-        self.wait(3)
+        self.wait(1)
         self.play(Write(eqn3))
-        self.wait(3)
+        self.wait()
 
 class Ecuations2(Scene):
     def construct(self):
