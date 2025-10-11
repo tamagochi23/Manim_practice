@@ -20,10 +20,10 @@ class GetRiemannRectangles(Scene):
             ).scale(0.8)
         graph = ax.plot(lambda x: np.sin(x), x_range = [0,2*PI], color = BLUE)
 
-        i = 1
-        dx = 0.6
-        n = int(np.floor(PI/dx))
-
+        i = 0
+        n_values = [2, 5, 10, 20, 33, 55]
+        n = n_values[i]
+        dx = np.pi/n
 
         title = MathTex(r"\int_0^{\pi} \sin(x) \, dx = 2", font_size = 48).to_edge(UP+LEFT*5)
 
@@ -32,7 +32,7 @@ class GetRiemannRectangles(Scene):
         sum_riemann_text = MathTex(r"\sum_{i=1}^{",f"{n}", "}", "\sin(x_i)", f"{round(dx,2):.2f}", f"={round(sum_riemann_value,3)}", font_size = 48).to_edge(UP+RIGHT*5)
 
         origin_label = MathTex("0", font_size = 48).next_to(ax.c2p(0,0), DOWN*4.5+RIGHT*0.5)
-        pi_label = MathTex(r"\pi", font_size = 48).next_to(ax.c2p(PI,0), DOWN*4.5+LEFT*0.5)
+        pi_label = MathTex(r"\pi", font_size = 48).next_to(ax.c2p(PI,0), DOWN*4.5)
         a = VGroup(ax,graph).to_edge(DOWN)
 
         self.play(Write(title), Write(sum_riemann_text))
@@ -45,15 +45,21 @@ class GetRiemannRectangles(Scene):
             color = ORANGE
         )
 
-        self.play(Create(rects_initial), run_time = 1.5)
+        self.play(Create(rects_initial), run_time = 2)
+        self.wait(1)
 
         sum_riemann_text.add_updater(
             lambda x: x.become(MathTex(r"\sum_{i=1}^{",f"{n}", "}", "\sin(x_i)", f"{round(dx,2):.2f}", f"={round(sum_riemann_value,3)}", font_size = 48).to_edge(UP+RIGHT*5))
         )
 
+        i += 1
+
+        n_values = [2, 5, 10, 20, 33, 55]
+        n = n_values[i]
+        dx = np.pi/n
+
+
         while True:
-            dx = 0.6-(i*0.05)
-            n = int(np.floor(PI/dx))
             rects_next = ax.get_riemann_rectangles(
                 graph,
                 x_range = [0, PI],
@@ -61,10 +67,13 @@ class GetRiemannRectangles(Scene):
                 color = ORANGE
             )
             sum_riemann_value = self.calculate_riemann_sum(lambda x: np.sin(x), 0, PI, dx)
-            self.play(ReplacementTransform(rects_initial, rects_next), run_time = 1)
+            self.play(ReplacementTransform(rects_initial, rects_next), run_time = 1.5)
+            self.wait(1)
+            n = n_values[i]
+            dx = np.pi/n
             i += 1
             rects_initial = rects_next
-            if i > 11:
+            if i > 5:
                 break
 
         
