@@ -160,8 +160,8 @@ class ParametricGraphUpdater_3(Scene):
 
         parametric_curve = ParametricFunction(
             lambda t: np.array([
-                np.sin(a.get_value()*(t**0.5)),
-                np.cos(b.get_value()*(t**0.5)),
+                np.sin(a.get_value()*(t**2)),
+                np.cos(b.get_value()*(t**2)),
                 0
             ]),
             t_range=[-PI, PI],
