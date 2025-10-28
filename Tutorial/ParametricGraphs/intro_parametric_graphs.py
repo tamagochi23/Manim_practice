@@ -239,7 +239,7 @@ class ParametricGraphUpdater_4(Scene):
             )
         )
 
-        parametric_text = MathTex(r"f(t) = ( \sin(","a",r"t^2), \cos(", "b", r"t^2) )", font_size=50).move_to(3.5*UP)
+        parametric_text = MathTex(r"f(t) = (e^{\frac{t}{6}}\sin(","a",r"2t), e^{\frac{t}{6}}\cos(", "b", r"2t) )", font_size=50).move_to(3.5*UP)
 
         parametric_text[1].set_color(PURPLE_A)
         parametric_text[3].set_color(GREEN)
