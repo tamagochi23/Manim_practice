@@ -183,3 +183,29 @@ class TwoGraphsVertical(Scene):
             self.play(Create(dot1), Create(dot2))
             self.wait(0.5)
             self.play(t.animate.set_value(1.5), run_time=15, rate_func=linear)
+
+class PlotGraph_within_rectangle(Scene):
+    def construct(self):
+        axes = Axes(
+            x_range=[-3, 3],
+            y_range=[-2, 2],
+            x_length=6,
+            y_length=4,
+            axis_config={"color": BLUE},
+            tips=False,
+        ).scale(1.5)
+        plot = (
+            ParametricFunction(
+                lambda t: np.array([
+                np.cos(t),
+                np.sin(t),
+                0
+            ]),
+            t_range=[-PI, PI],
+            color=RED
+        ).stretch_to_fit_width(5).stretch_to_fit_height(5)
+        )
+        plot_bg = SurroundingRectangle(plot).set_color(WHITE)
+        self.add(axes)
+        self.play(Create(plot_bg))
+        self.play(Create(plot))
