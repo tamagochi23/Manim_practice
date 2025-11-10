@@ -3,16 +3,6 @@ import math
 
 class IntroTaylorSeries(Scene):
     def construct(self):
-        #title = Text("Taylor's Series")
-        #self.play(Write(title))
-
-        # Display the Taylor series formula
-        #taylor_formula = MathTex(
-        #    "f(x) = f(a) + f'(a)(x - a) + \\frac{f''(a)}{2!}(x - a)^2 + \\frac{f'''(a)}{3!}(x - a)^3 + \\cdots"
-        #).scale(0.8)
-        #self.play(Write(taylor_formula))
-        #self.wait(4)
-        #self.play(FadeOut(taylor_formula))
         
         title = Text("Taylor Series", font_size=40, font = "Castellar").move_to(3.5*UP).set_color_by_gradient(BLUE_C, GREEN_C)
 
