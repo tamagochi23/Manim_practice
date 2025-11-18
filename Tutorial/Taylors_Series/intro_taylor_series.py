@@ -7,7 +7,7 @@ class IntroTaylorSeries(Scene):
         title = Text("Taylor Series", font_size=40, font = "Castellar").move_to(3.5*UP).set_color_by_gradient(BLUE_C, GREEN_C)
 
         axes = Axes(
-            x_length=10,
+            x_length=11,
             y_length=6,
             axis_config={"color": GREY},
             tips=False,
