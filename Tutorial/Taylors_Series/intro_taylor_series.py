@@ -13,13 +13,15 @@ class IntroTaylorSeries(Scene):
             tips=False,
         ).move_to(DOWN*0.75)
 
+        taylor_definition = MathTex("f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(0)}{n!} (x-0)^n").scale(0.8).move_to(2.5*UP+LEFT*4)
+
         taylor_formula = MathTex(
-            "sin(x) ~ x",'- \\frac{x^3}{3!}','+ \\frac{x^5}{5!}','- \\frac{x^7}{7!}','+ \\frac{x^9}{9!}'
+            "\\sin{x} \\approx x",'- \\frac{x^3}{3!}','+ \\frac{x^5}{5!}','- \\frac{x^7}{7!}','+ \\frac{x^9}{9!}'
         ).scale(0.8).move_to(1*UP+LEFT*4)
 
         self.add(title)
 
-        self.add(axes)
+        self.add(axes, taylor_definition)
 
         # Show an example function and its Taylor series approximation
         func = axes.plot(lambda x: np.sin(x), color=BLUE)
