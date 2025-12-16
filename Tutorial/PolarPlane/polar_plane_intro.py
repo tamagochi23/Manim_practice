@@ -179,18 +179,20 @@ class PolarPlane_6(Scene):
             radius_config={"font_size": 33.6},
         ).set_color(BLUE_E).add_coordinates().move_to(RIGHT*2.5+DOWN*0.5)
         a = ValueTracker(1)
-        r = lambda theta: np.exp(theta/15)
+        b = ValueTracker(1)
+        r = lambda theta: 3*abs(np.cos(a.get_value()*theta)) + 2*abs(np.sin(b.get_value()*theta))
         #r2 = lambda theta: (-theta/3) + 4
         graph = polar_plane.plot_polar_graph(r, [0, 2*PI],color=RED_E)
         #graph2 = polar_plane.plot_polar_graph(r, [0, 6*PI],color=YELLOW_E)
 
         title = Text("Polar Coordinates", font_size=40, font = "Castellar").move_to(3.5*UP).set_color_by_gradient(BLUE_C, GREEN_C)
 
-        polar_eq = MathTex(r"r = \sqrt{|", "a", r"^2 2\cos(","a",r"\theta)|}", font_size=60).move_to(4.0*LEFT + 1*UP)
+        polar_eq = MathTex(r"r = 3|\cos(", "a", r"\theta)| + 2|\sin(","b",r"\theta)|", font_size=47).move_to(4.0*LEFT + 1*UP)
         polar_eq[1].set_color(PURPLE_A)
-        polar_eq[3].set_color(PURPLE_A)
+        polar_eq[3].set_color(GREEN)
 
-        a_text = MathTex(f"a = {a.get_value():.2f}", font_size=60).move_to(4.0*LEFT + 0.5*DOWN).set_color(PURPLE_A)  
+        a_text = MathTex(f"a = {a.get_value():.2f}", font_size=55).move_to(4.0*LEFT + 0.5*DOWN).set_color(PURPLE_A)  
+        b_text = MathTex(f"b = {b.get_value():.2f}", font_size=55).move_to(4.0*LEFT + 1.5*DOWN).set_color(GREEN)  
 
 
         graph.add_updater(
@@ -198,12 +200,13 @@ class PolarPlane_6(Scene):
         )
 
         a_text.add_updater(lambda m: m.become(MathTex(f"a = {a.get_value():.2f}", font_size=60).move_to(4.0*LEFT + 0.5*DOWN).set_color(PURPLE_A)))
-        
+        b_text.add_updater(lambda m: m.become(MathTex(f"b = {b.get_value():.2f}", font_size=60).move_to(4.0*LEFT + 1.5*DOWN).set_color(GREEN)))
+                
         logo = ImageMobject("../../templates/media/images/logo_pi_x_bit.jpg")
 
 
-        self.add(title, polar_plane, graph, polar_eq, a_text)
-        #self.play(FadeIn(logo.scale(0.27).to_corner(DR)))
-        self.play(a.animate.set_value(2), run_time=6)
-        #self.play(a.animate.set_value(0.1), run_time=8)
+        self.add(title, polar_plane, graph, polar_eq, a_text, b_text)
+        self.play(FadeIn(logo.scale(0.27).to_corner(DR)))
+        self.play(a.animate.set_value(2), run_time=10)
+        self.play(b.animate.set_value(2), run_time=10)
         self.wait()
