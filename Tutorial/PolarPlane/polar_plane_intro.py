@@ -207,6 +207,6 @@ class PolarPlane_6(Scene):
 
         self.add(title, polar_plane, graph, polar_eq, a_text, b_text)
         self.play(FadeIn(logo.scale(0.19).to_corner(DR)))
-        #self.play(a.animate.set_value(2), run_time=10)
-        #self.play(b.animate.set_value(2), run_time=10)
+        self.play(a.animate.set_value(2), run_time=10)
+        self.play(b.animate.set_value(2), run_time=10)
         self.wait()
