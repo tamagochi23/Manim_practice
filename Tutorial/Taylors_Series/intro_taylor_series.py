@@ -16,8 +16,8 @@ class IntroTaylorSeries(Scene):
         taylor_definition = MathTex("f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(0)}{n!} (x-0)^n").scale(0.8).move_to(2.5*UP+LEFT*4)
 
         taylor_formula = MathTex(
-            "\\sin{x} \\approx x",'- \\frac{x^3}{3!}','+ \\frac{x^5}{5!}','- \\frac{x^7}{7!}','+ \\frac{x^9}{9!}'
-        ).scale(0.8).move_to(1*UP+LEFT*4)
+            "\\sin{x} \\approx x",'- \\frac{x^3}{3!}','+ \\frac{x^5}{5!}','- \\frac{x^7}{7!}','+ \\frac{x^9}{9!}', '- \\frac{x^{11}}{11!}'
+        ).scale(0.8).move_to(1*UP+LEFT*3.5)
 
         self.add(title)
 
@@ -43,6 +43,11 @@ class IntroTaylorSeries(Scene):
             color=RED,
         )
 
+        taylor_approx_5 = axes.plot(
+            lambda x: x - (x**3)/math.factorial(3) + (x**5)/math.factorial(5) - (x**7)/math.factorial(7) + (x**9)/math.factorial(9) - (x**11)/math.factorial(11), 
+            color=RED,
+        )
+
 
         self.play(Create(func), run_time=2)
         self.wait(0.5)
@@ -60,6 +65,10 @@ class IntroTaylorSeries(Scene):
         self.wait(0.5)
 
         self.play(Write(taylor_formula[4]),Transform(taylor_approx_0, taylor_approx_4), run_time=2)
+        self.wait(0.5)
+
+        self.play(Write(taylor_formula[5]),Transform(taylor_approx_0, taylor_approx_5), run_time=2)
+        self.wait(0.5)       
 
         self.wait(2)
 
