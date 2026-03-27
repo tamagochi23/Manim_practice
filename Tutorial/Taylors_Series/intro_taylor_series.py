@@ -87,8 +87,8 @@ class IntroTaylorSeries_2(Scene):
         taylor_definition = MathTex("f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(0)}{n!} (x-0)^n").scale(0.8).move_to(2.5*UP+LEFT*4)
 
         taylor_formula = MathTex(
-            "e^{x} \\approx 1",'+ \\frac{x^2}{2!}','+ \\frac{x^3}{3!}','+ \\frac{x^4}{4!}','+ \\frac{x^5}{5!}'
-        ).scale(0.8).move_to(1*UP+LEFT*4)
+            "e^{x} \\approx 1",'+ x','+ \\frac{x^2}{2!}','+ \\frac{x^3}{3!}','+ \\frac{x^4}{4!}','+ \\frac{x^5}{5!}','+ \\frac{x^6}{6!}'
+        ).scale(0.8).move_to(1*UP+LEFT*3)
 
         self.add(title)
 
@@ -114,6 +114,11 @@ class IntroTaylorSeries_2(Scene):
             color=RED,
         )
 
+        taylor_approx_5 = axes.plot(
+            lambda x: 1 + x +(x**2)/math.factorial(2) + (x**3)/math.factorial(3) + (x**4)/math.factorial(4) + (x**5)/math.factorial(5), 
+            color=RED,
+        )
+
 
         self.play(Create(func), run_time=2)
         self.wait(0.5)
@@ -131,6 +136,10 @@ class IntroTaylorSeries_2(Scene):
         self.wait(0.5)
 
         self.play(Write(taylor_formula[4]),Transform(taylor_approx_0, taylor_approx_4), run_time=2)
+        self.wait(0.5)
+
+        self.play(Write(taylor_formula[5]),Transform(taylor_approx_0, taylor_approx_5), run_time=2)
+        self.wait(0.5)
 
         self.wait(2)
 
