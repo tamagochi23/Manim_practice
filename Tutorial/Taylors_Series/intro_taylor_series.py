@@ -212,16 +212,16 @@ class IntroTaylorSeries_4(Scene):
         title = Text("Taylor Series", font_size=40, font = "Castellar").move_to(3.5*UP).set_color_by_gradient(BLUE_C, GREEN_C)
 
         axes = Axes(
-            x_length=11,
+            x_length=20,
             y_length=6,
             axis_config={"color": GREY},
             tips=False,
         ).move_to(DOWN*0.75)
 
-        taylor_definition = MathTex("f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(1)}{n!} (x-1)^n").scale(0.8).move_to(2.5*UP+LEFT*4)
+        taylor_definition = MathTex("f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(0)}{n!} x^n").scale(0.8).move_to(2.5*UP+LEFT*4)
 
         taylor_formula = MathTex(
-            "\\ln(x) \\approx (x-1)",'- \\frac{(x-1)^2}{2!}','+ \\frac{(x-1)^3}{3!}','- \\frac{(x-1)^4}{4!}','+ \\frac{(x-1)^5}{5!}'
+            "\\tan(x) \\approx 0",'+ x','+ 0','+ \\frac{2 x^3}{3!}','+ 0','+ \\frac{16 x^5}{5!}'
         ).scale(0.52).move_to(1*UP+LEFT*3.5)
 
         self.add(title)
@@ -229,42 +229,126 @@ class IntroTaylorSeries_4(Scene):
         self.add(axes, taylor_definition)
 
         # Show an example function and its Taylor series approximation
-        func = axes.plot(lambda x: 2*np.exp(-1/(x**2)) - 1
-                         , color=BLUE)
-        # taylor_approx_0 = axes.plot(
-        #     lambda x: (x-1) , color=RED
-        # )
-        # taylor_approx_1 = axes.plot(
-        #     lambda x: (x-1) - ((x-1)**2)/math.factorial(2), color=RED
-        # )
-        # taylor_approx_2 = axes.plot(
-        #     lambda x: (x-1) - ((x-1)**2)/math.factorial(2) + ((x-1)**3)/math.factorial(3), color=RED,
-        # )
-        # taylor_approx_3 = axes.plot(
-        #     lambda x: (x-1) - ((x-1)**2)/math.factorial(2) + ((x-1)**3)/math.factorial(3) - ((x-1)**4)/math.factorial(4), 
-        #     color=RED,
-        # )
-        # taylor_approx_4 = axes.plot(
-        #     lambda x: (x-1) - ((x-1)**2)/math.factorial(2) + ((x-1)**3)/math.factorial(3) - ((x-1)**4)/math.factorial(4) + ((x-1)**5)/math.factorial(5), 
-        #     color=RED,
-        # )
+        func = axes.plot(lambda x: np.tan(x)
+                         , color=BLUE, x_range=[-PI/2 + 0.1, PI/2 - 0.1])
+        taylor_approx_0 = axes.plot(
+           lambda x: 0, color=RED
+        )
+        taylor_approx_1 = axes.plot(
+            lambda x: x, color=RED
+        )
+        taylor_approx_2 = axes.plot(
+            lambda x: x, color=RED,
+        )
+        taylor_approx_3 = axes.plot(
+            lambda x: x + (2*x**3)/math.factorial(3), 
+            color=RED,
+        )
+        taylor_approx_4 = axes.plot(
+            lambda x: x + (2*x**3)/math.factorial(3), 
+            color=RED,
+        )
+        taylor_approx_5 = axes.plot(
+            lambda x: x + (2*x**3)/math.factorial(3) + (16*x**5)/math.factorial(5), 
+            color=RED,
+        )
 
 
         self.play(Create(func), run_time=2)
         self.wait(0.5)
 
-        # self.play(Write(taylor_formula[0]),Create(taylor_approx_0), run_time=2)
-        # self.wait(0.5)
+        self.play(Write(taylor_formula[0]),Create(taylor_approx_0), run_time=2)
+        self.wait(0.5)
 
-        # self.play(Write(taylor_formula[1]),Transform(taylor_approx_0, taylor_approx_1), run_time=2)
-        # self.wait(0.5)
+        self.play(Write(taylor_formula[1]),Transform(taylor_approx_0, taylor_approx_1), run_time=2)
+        self.wait(0.5)
 
-        # self.play(Write(taylor_formula[2]),Transform(taylor_approx_0, taylor_approx_2), run_time=2)
-        # self.wait(0.5)
+        self.play(Write(taylor_formula[2]),Transform(taylor_approx_0, taylor_approx_2), run_time=2)
+        self.wait(0.5)
 
-        # self.play(Write(taylor_formula[3]),Transform(taylor_approx_0, taylor_approx_3), run_time=2)
-        # self.wait(0.5)
+        self.play(Write(taylor_formula[3]),Transform(taylor_approx_0, taylor_approx_3), run_time=2)
+        self.wait(0.5)
 
-        # self.play(Write(taylor_formula[4]),Transform(taylor_approx_0, taylor_approx_4), run_time=2)
+        self.play(Write(taylor_formula[4]),Transform(taylor_approx_0, taylor_approx_4), run_time=2)
+        self.wait(0.5)
+
+        self.play(Write(taylor_formula[5]),Transform(taylor_approx_0, taylor_approx_5), run_time=2)
+        self.wait(2)
+
+class IntroTaylorSeries_5(Scene):
+    def construct(self):
+        
+        title = Text("Taylor Series", font_size=40, font = "Castellar").move_to(3.5*UP).set_color_by_gradient(BLUE_C, GREEN_C)
+
+        axes = Axes(
+            x_length=20,
+            y_length=6,
+            axis_config={"color": GREY},
+            tips=False,
+        ).move_to(DOWN*0.75)
+
+        taylor_definition = MathTex("f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(0)}{n!} x^n").scale(0.8).move_to(2.5*UP+LEFT*5)
+
+        taylor_formula = MathTex(
+            "\\sec(x) \\approx 1",'+ 0','+ \\frac{x^2}{2!}','+ 0','+ \\frac{5 x^4}{4!}','+ 0','+ \\frac{61 x^6}{6!}'
+        ).scale(0.6).move_to(LEFT*4.3-0.3*UP)
+ 
+        self.add(title)
+
+        self.add(axes, taylor_definition) 
+
+        # Show an example function and its Taylor series approximation
+        func = axes.plot(lambda x: (1/np.cos(x))
+                         , color=BLUE, x_range=[-PI/2 + 0.1, PI/2 - 0.1])
+        taylor_approx_0 = axes.plot(
+           lambda x: 1, color=RED
+        )
+        taylor_approx_1 = axes.plot(
+            lambda x: 1, color=RED
+        )
+        taylor_approx_2 = axes.plot(
+            lambda x: 1 + (x**2)/math.factorial(2), color=RED,
+        )
+        taylor_approx_3 = axes.plot(
+            lambda x: 1 + (x**2)/math.factorial(2), 
+            color=RED,
+        )
+        taylor_approx_4 = axes.plot(
+            lambda x: 1 + (x**2)/math.factorial(2) + (5*x**4)/math.factorial(4), 
+            color=RED,
+        )
+        taylor_approx_5 = axes.plot(
+            lambda x: 1 + (x**2)/math.factorial(2) + (5*x**4)/math.factorial(4), 
+            color=RED,
+        )
+        taylor_approx_6 = axes.plot(
+            lambda x: 1 + (x**2)/math.factorial(2) + (5*x**4)/math.factorial(4) + (61*x**6)/math.factorial(6), 
+            color=RED,
+        )
+
+
+        self.play(Create(func), run_time=2)
+        self.wait(0.5)
+
+        self.play(Write(taylor_formula[0]),Create(taylor_approx_0), run_time=2)
+        self.wait(0.5)
+
+        self.play(Write(taylor_formula[1]),Transform(taylor_approx_0, taylor_approx_1), run_time=2)
+        self.wait(0.5)
+
+        self.play(Write(taylor_formula[2]),Transform(taylor_approx_0, taylor_approx_2), run_time=2)
+        self.wait(0.5)
+
+        self.play(Write(taylor_formula[3]),Transform(taylor_approx_0, taylor_approx_3), run_time=2)
+        self.wait(0.5)
+
+        self.play(Write(taylor_formula[4]),Transform(taylor_approx_0, taylor_approx_4), run_time=2)
+        self.wait(0.5)
+
+        self.play(Write(taylor_formula[5]),Transform(taylor_approx_0, taylor_approx_5), run_time=2)
+        self.wait(0.5)
+
+        self.play(Write(taylor_formula[6]),Transform(taylor_approx_0, taylor_approx_6), run_time=2)
+        self.wait(0.5)
 
         self.wait(2)
