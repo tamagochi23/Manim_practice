@@ -17,7 +17,7 @@ class OneGraphOverlapping(Scene):
         background = Rectangle(
             width=config.frame_width,
             height=config.frame_height,
-            fill_color=BLACK,   # same as background!
+            fill_color=BLACK,   
             fill_opacity=1,
             stroke_width=0
         )
@@ -25,23 +25,23 @@ class OneGraphOverlapping(Scene):
         rectangle_display =  Rectangle(
             width=axes1.width,
             height=axes1.height,
-            fill_color=RED,   # same as background!
-            fill_opacity=0.2,
+            fill_color=RED,   
+            fill_opacity=0,
             stroke_width=0
         )
 
 
         shape_with_hole = Difference(background, rectangle_display)
-        shape_with_hole.set_fill(color=BLACK, opacity=1)
-        shape_with_hole.set_stroke(width=0)
+        shape_with_hole.set_fill(color=BLACK, opacity=1).set_stroke(width=0)
 
         shape_with_hole.set_z_index(2)
         g1.set_z_index(1)
         axes1.set_z_index(1)
 
-        #border = SurroundingRectangle(axes1, color=GRAY)
+        border = SurroundingRectangle(rectangle_display, color=GRAY)
+        border.set_z_index(3)
 
-        self.add(shape_with_hole)
+        self.add(shape_with_hole, border)
         self.add(g1, axes1)
         #self.play(Create(g1))
         self.play(a.animate.set_value(2), run_time=2)
